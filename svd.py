@@ -4,7 +4,7 @@ import numpy as np
 import random
 
 
-class SVD:
+class SVD(object):
     def __init__(self, data, k=10):
         self.data = np.array(data)
         self.k = k
