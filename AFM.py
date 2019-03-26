@@ -71,7 +71,6 @@ class AFM(BaseEstimator, TransformerMixin):
             self.label = tf.placeholder(tf.float32, shape=[None, 1], name='label')
             self.dropout_keep_deep = tf.placeholder(tf.float32, shape=[None], name='dropout_keep_deep')
             self.train_phase = tf.placeholder(tf.bool,name='train_phase')
-
             self.weights = self._initialize_weights()
 
             # -------------------------------embedding_layer---------------------------------
@@ -237,7 +236,6 @@ class AFM(BaseEstimator, TransformerMixin):
                 Xi_batch,Xv_batch,y_batch = self.get_batch(Xi_train,Xv_train,y_train,
                                                            self.batch_size,i)
                 self.fit_on_batch(Xi_batch,Xv_valid,y_batch)
-
             if has_valid:
                 y_valid = np.array(y_valid).reshape((-1,1))
                 prob = self.predict(Xi_valid,Xv_valid,y_valid)
