@@ -36,6 +36,7 @@ class FFM(object):
 
             self.x = tf.placehoder(tf.float32,[None,self.feature_size],name='input_x')
             self.y = tf.placehoder(tf.float32,[None,1],name='label')
+            self.x_field = tf.placehoder(tf.float32,[self.feature_size,1])
             self.weights = self._init_weight()
 
             #线性
@@ -47,10 +48,10 @@ class FFM(object):
             self.secend_term = tf.Variable(0,dtype=tf.float32)
             for i in range(self.feature_size):
                 featureIndex1 = i
-                fieldIndex1 = int(x_field)  #x_field表示feature-field对应表
+                fieldIndex1 = int(self.x_field[i])  #x_field表示feature-field对应表
                 for j in range(i+1,self.feature_size):
                     featureIndex2 = j
-                    fieldIndex2 = int(x_field)
+                    fieldIndex2 = int(self.x_field[j])
                     left_embedding = tf.convert_to_tensor(
                         [featureIndex1,featureIndex2,i] for i in range(self.embedding_size))
                     left_weight = tf.gather_nd(self.weights['interaction_embedding'],left_embedding)
@@ -99,15 +100,9 @@ class FFM(object):
             }
             _,loss = self.sess.run([self.optimizer,self.loss],feed_dict=feed_dict)
 
+        feed_dict1 = {self.x:X_valid,
+                      self.y:y_train
+        }
+        _,loss = self.sess.run([self.loss],feed_dict=feed_dict)
 
-
-
-
-
-
-
-
-
-
-
-
+        print 'validation loss:',loss

@@ -49,11 +49,15 @@ class MLR(object):
         self.pred = tf.reduce_sum(tf.multiply(self.p1,self.p2),1)
         l1 = 0
         l21 = 0
-        self.square_u = [self.u[i][j]**2 for j in range(self.m) for i in range(self.feature_size)]
-        self.square_w = [self.w[i][j]**2 for j in range(self.m) for i in range(self.feature_size)]
-        for i in range(self.feature_size):
-            l1 += sum(map(abs,self.u[i,:]))+sum(map(abs,self.w[i,:]))
-            l21 += sum(np.sqrt(self.square_u[i,:]))+sum(np.sqrt(self.square_w[i,:]))
+        self.square_u = tf.square(self.u)
+        self.square_w = tf.square(self.w)
+
+        l1 = tf.reduce_sum(tf.abs(tf.concat(1,[self.u,self.w])))
+        l21 = tf.reduce_sum(
+            tf.sqrt(
+                tf.reduce_sum(tf.concat(1,[tf.square(u),tf.square(w)]))
+            )
+        )
         self.regularization = self.Lambda*l21 + self.beta *l1
         self.loss = tf.add_n([tf.reduce_sum(tf.nn.sigmoid_entropy_with_logits(logits=pred,labels=label))])
         self.loss = self.loss+self.regularization
