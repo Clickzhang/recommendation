@@ -30,6 +30,7 @@ def LFM(A,k,learning_rate,lambda_value):
                         v[q][j] += learning_rate*loss_v
     return u,v
 
+
 if __name__ == '__main__':
     A = np.array([[4,2,0,4,5],[5,3,1,5,2],
                   [1,4,2,0,1],[5,3,1,0,1],[5,2,5,3,0]])
