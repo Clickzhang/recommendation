@@ -6,7 +6,6 @@ transform DataFrame(np.array) to ffm data form
 
 """
 
-
 class FeatureDictionary(object):
     def __init__(self, trainfile=None, testfile=None,
                  dftrain=None, dftest=None, numeric_cols=[], ignore_cols=[]):
