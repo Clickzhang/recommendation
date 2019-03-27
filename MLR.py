@@ -52,14 +52,15 @@ class MLR(object):
         self.square_u = tf.square(self.u)
         self.square_w = tf.square(self.w)
 
-        l1 = tf.reduce_sum(tf.abs(tf.concat(1,[self.u,self.w])))
+        l1 = tf.reduce_sum(tf.abs(tf.concat([self.u,self.w],1)))
         l21 = tf.reduce_sum(
             tf.sqrt(
-                tf.reduce_sum(tf.concat(1,[tf.square(u),tf.square(w)]))
+                tf.reduce_sum(tf.concat([tf.square(u),tf.square(w)],1))
             )
         )
         self.regularization = self.Lambda*l21 + self.beta *l1
-        self.loss = tf.add_n([tf.reduce_sum(tf.nn.sigmoid_entropy_with_logits(logits=pred,labels=label))])
+        self.loss = tf.add_n([tf.reduce_sum(tf.nn.sigmoid_entropy_with_logits(
+            logits=pred,labels=label))])
         self.loss = self.loss+self.regularization
         self.optimizer = tf.train.FtrlOptimizer(learning_rate).minimize(loss)
 
@@ -84,10 +85,3 @@ if __name__ == "__main__":
     prams['feature_size'] = X_train.shape[1]
     mlr = MLR(**prams)
     mlr.train(X_train, y_train, X_test, y_test)
-
-
-
-
-
-
-
