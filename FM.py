@@ -69,6 +69,9 @@ class FM(object):
             LOSS.append(loss)
         print 'RMSE',np.sqrt(np.array(LOSS).mean())
 
+        _,loss = self.sess.run([self.loss],feed_dict={x:X_valid.reshape(-1,self.feature_size),
+                                                      y:y_valid.reshape(-1,1)})
+        print 'validation loss:',loss
 
 
 
