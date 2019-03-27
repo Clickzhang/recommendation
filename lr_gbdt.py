@@ -149,7 +149,6 @@ lgb_model = lgb.train(lgb_params,
 train_sz = train.shape[0]
 combineDf = pd.concat([train, test], axis=0, ignore_index=True)
 
-
 #得到叶节点编号 Feature Transformation
 gbdt_feats_vals = lgb_model.predict(combineDf[lgb_feats], pred_leaf=True)
 gbdt_columns = ["gbdt_leaf_indices_" + str(i) for i in range(0, gbdt_feats_vals.shape[1])]

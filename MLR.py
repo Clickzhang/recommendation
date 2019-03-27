@@ -4,9 +4,6 @@ import tensorflow as tf
 from sklearn.metrics import roc_auc_score
 import numpy as np
 
-"""
-prams
-"""
 prams = {
 'm':5,
 'learning_rate':0.01,

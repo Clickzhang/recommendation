@@ -5,6 +5,7 @@ import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin #定义转换函器,实现类似于sklearn的一些基本功能
 from sklearn.metrics import roc_auc_score
 
+
 class AFM(BaseEstimator, TransformerMixin):
     def __init__(self,
                  feature_size,

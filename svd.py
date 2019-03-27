@@ -1,5 +1,5 @@
 # coding=utf-8
-# @author@:zxf
+
 import numpy as np
 import random
 

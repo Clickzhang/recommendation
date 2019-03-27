@@ -7,15 +7,13 @@ class FFM(object):
                  embedding_size=6,
                  lambda_w = 0.01,
                  lambda_v = 0.01,
-                 learning_rate = 0.01,
-                 batch_size = 1000):
+                 learning_rate = 0.01):
         self.field_size = field_size
         self.feature_size = feature_size
         self.embedding_size = embedding_size
         self.lambda_w = lambda_w
         self.lambda_v = lambda_v
         self.learning_rate = learning_rate
-        self.batch_size = batch_size
 
         self._init_graph()
 

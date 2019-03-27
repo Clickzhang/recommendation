@@ -159,6 +159,7 @@ class NFM(BaseEstimator, TransformerMixin):
 
             self.y_bias = self.weights['bias'] * tf.ones_like(self.label)
 
+
             # out
             self.out = tf.add_n([tf.reduce_sum(self.y_first_order, 1, keepdims=True),
                                  tf.reduce_sum(self.y_deep, 1, keepdims=True),
