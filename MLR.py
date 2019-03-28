@@ -52,6 +52,7 @@ class MLR(object):
         self.square_u = tf.square(self.u)
         self.square_w = tf.square(self.w)
 
+        # regularation
         l1 = tf.reduce_sum(tf.abs(tf.concat([self.u,self.w],1)))
         l21 = tf.reduce_sum(
             tf.sqrt(
@@ -70,7 +71,6 @@ class MLR(object):
         self.sess.run(init)
 
     def train(self,X_train,y_train,X_test,y_test):
-
         for epoch in range(self.epochs):
             feed_dict = {x:X_train,y:y_train}
             _,loss,pred = self.sess.run([self.optimizer,self.loss,self.pred],feed_dict=feed_dict)
